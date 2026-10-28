@@ -1,0 +1,1215 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>مُتقن | رحلة 30 قصة — منصة المتابعة التربوية الذكية</title>
+  
+  <!-- Arabic Fonts: Cairo & Tajawal -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="app.css">
+  <link rel="icon" type="image/png" href="img/logo_badge.png">
+</head>
+<body>
+
+<div class="app-container">
+  
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <img src="img/logo_badge.png" alt="شعار إتقان التربية" class="sidebar-logo-img">
+      <div>
+        <div class="sidebar-brand-title">مُتقن | رحلة 30 قصة</div>
+        <div class="sidebar-brand-sub">برنامج حذق — الملهم التربوي</div>
+        <span class="sidebar-brand-badge">الصف الرابع الابتدائي</span>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="nav-section-title">الرئيسية والمتابعة</div>
+      <a class="nav-item active" data-view="dashboard">
+        <span class="nav-icon">📊</span>
+        <span>لوحة التحكم</span>
+      </a>
+      <a class="nav-item" data-view="students">
+        <span class="nav-icon">👨‍🎓</span>
+        <span>جميع الطلاب (15)</span>
+        <span class="nav-badge" id="sidebarStudentCount">15</span>
+      </a>
+
+      <div class="nav-section-title">مكتبة القصص المعتمدة (60)</div>
+      <a class="nav-item" data-view="arabic-library">
+        <span class="nav-icon">📖</span>
+        <span>المكتبة العربية (30)</span>
+      </a>
+      <a class="nav-item" data-view="english-library">
+        <span class="nav-icon">🌍</span>
+        <span>Reading in English (30)</span>
+      </a>
+
+      <div class="nav-section-title">العمليات والتقييم</div>
+      <a class="nav-item" data-view="new-reading">
+        <span class="nav-icon">✍️</span>
+        <span>تسجيل قصة جديدة</span>
+      </a>
+      <a class="nav-item" data-view="monthly-tracking">
+        <span class="nav-icon">📅</span>
+        <span>المتابعة الشهرية</span>
+      </a>
+      <a class="nav-item" data-view="evaluations">
+        <span class="nav-icon">🎯</span>
+        <span>التقييمات القرائية</span>
+      </a>
+      <a class="nav-item" data-view="badges">
+        <span class="nav-icon">🏆</span>
+        <span>الإنجازات والشارات</span>
+      </a>
+
+      <div class="nav-section-title">الإدارة والتقارير</div>
+      <a class="nav-item" data-view="reports">
+        <span class="nav-icon">📑</span>
+        <span>التقارير والتصدير</span>
+      </a>
+      <a class="nav-item" data-view="settings">
+        <span class="nav-icon">⚙️</span>
+        <span>إعدادات المبادرة</span>
+      </a>
+      <a class="nav-item" data-view="backup">
+        <span class="nav-icon">💾</span>
+        <span>النسخ الاحتياطي والبيانات</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="teacher-avatar">م</div>
+      <div class="teacher-info">
+        <div class="teacher-name">الأستاذ المشرف</div>
+        <div class="teacher-role">معلم مبادرة مُتقن</div>
+      </div>
+      <button class="btn btn-sm btn-outline no-print" onclick="openLoginModal()" title="تسجيل الدخول / تغيير الرمز" style="padding: 4px 8px; color: #fff; border-color: rgba(255,255,255,0.2);">🔑</button>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT AREA -->
+  <main class="main-content">
+    
+    <!-- Topbar -->
+    <header class="topbar">
+      <div class="topbar-right">
+        <button class="mobile-toggle-btn" id="mobileToggleBtn" aria-label="القائمة">☰</button>
+        <div class="topbar-page-title" id="pageTitle">
+          <span>📊</span>
+          <span>لوحة التحكم الرئيسية</span>
+        </div>
+      </div>
+
+      <div class="topbar-left">
+        <div class="topbar-search-box">
+          <span class="topbar-search-icon">🔍</span>
+          <input type="text" id="globalStudentSearch" class="topbar-search-input" placeholder="بحث سريع عن طالب بالاسم أو الرقم...">
+        </div>
+        <button class="topbar-btn topbar-btn-primary" onclick="showNewReadingModal()">
+          <span>➕</span>
+          <span>تسجيل قراءة</span>
+        </button>
+        <button class="topbar-btn topbar-btn-outline" onclick="window.print()" title="طباعة الصفحة الحالية">
+          <span>🖨️</span>
+          <span>طباعة</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Page Body Container (Views switch dynamically) -->
+    <div class="page-body">
+      
+      <!-- HERO BANNER (Global Header) -->
+      <section class="initiative-hero-banner no-print">
+        <div class="hero-text">
+          <h1>
+            <span>مُبَادَرَةُ «مُتْقَن» | رِحْلَةُ 30 قِصَّة</span>
+          </h1>
+          <div class="slogan">«نقرأ لنتعلم، ونتعلم لنتقن»</div>
+          <p class="desc">
+            مشروع تربوي نوعي ينبثق من <strong>برنامج حذق</strong> ضمن <strong>مبادرات الملهم التربوي (إتقان التربية)</strong>، يستهدف طلاب الصف الرابع الابتدائي لترسيخ عادة القراءة الهادفة وتنمية الفهم القرائي وإثراء الثروة اللغوية باللغتين العربية والإنجليزية.
+          </p>
+          <div class="hero-meta-badges">
+            <span class="hero-meta-badge">🎯 الهدف الرسمي: 30 قصة</span>
+            <span class="hero-meta-badge">📚 المكتبة المتاحة: 60 قصة (30 عربية + 30 إنجليزية)</span>
+            <span class="hero-meta-badge">👥 الطلاب: 15 طالباً</span>
+            <span class="hero-meta-badge">🔒 حفظ سحابي دائم (ACID DB)</span>
+          </div>
+        </div>
+        <img src="img/logo.png" alt="شعار إتقان التربية" class="hero-logo-large">
+      </section>
+
+      <!-- VIEW 1: DASHBOARD -->
+      <div id="view-dashboard" class="view-section">
+        
+        <!-- Metrics Grid -->
+        <div class="stats-grid">
+          <div class="stat-card stat-navy">
+            <div>
+              <div class="stat-info-title">إجمالي طلاب الصف الرابع</div>
+              <div class="stat-info-val" id="dashTotalStudents">15</div>
+              <div class="stat-info-sub">👥 جميع الطلاب مسجلون ومعتمدون</div>
+            </div>
+            <div class="stat-icon-bubble stat-bubble-navy">👨‍🎓</div>
+          </div>
+
+          <div class="stat-card stat-emerald">
+            <div>
+              <div class="stat-info-title">القصص المعتمدة رسمياً</div>
+              <div class="stat-info-val" id="dashApprovedStories">0</div>
+              <div class="stat-info-sub" id="dashStoriesBreakdown">🇸🇦 0 عربي | 🇬🇧 0 إنجليزي</div>
+            </div>
+            <div class="stat-icon-bubble stat-bubble-emerald">✅</div>
+          </div>
+
+          <div class="stat-card stat-purple">
+            <div>
+              <div class="stat-info-title">متوسط الإنجاز القرائي للفصل</div>
+              <div class="stat-info-val" id="dashAvgProgress">0%</div>
+              <div class="stat-info-sub">من أصل هدف 30 قصة للطالب</div>
+            </div>
+            <div class="stat-icon-bubble stat-bubble-purple">📈</div>
+          </div>
+
+          <div class="stat-card stat-gold">
+            <div>
+              <div class="stat-info-title">قصص بانتظار الاعتماد</div>
+              <div class="stat-info-val" id="dashPendingStories">0</div>
+              <div class="stat-info-sub">تحتاج مراجعة وتقييم المعلم</div>
+            </div>
+            <div class="stat-icon-bubble stat-bubble-gold">⏳</div>
+          </div>
+        </div>
+
+        <!-- Dashboard Two Columns -->
+        <div class="dashboard-grid-2">
+          
+          <!-- Left Column: Students Overview & Progress Table -->
+          <div class="dashboard-card">
+            <div class="card-header">
+              <div class="card-title">
+                <span>📋</span>
+                <span>سجل تقدم الطلاب نحو هدف الـ 30 قصة</span>
+              </div>
+              <div class="card-actions">
+                <button class="btn btn-sm btn-outline" onclick="switchView('students')">عرض الكل ↗</button>
+              </div>
+            </div>
+            <div class="card-body" style="padding: 0;">
+              <div class="data-table-container">
+                <table class="data-table" id="dashboardStudentsTable">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>الرقم التعريفي</th>
+                      <th>اسم الطالب الرباعي</th>
+                      <th>المعتمد</th>
+                      <th>العربية</th>
+                      <th>الإنجليزية</th>
+                      <th>نسبة الإنجاز (من 30)</th>
+                      <th>الحالة</th>
+                      <th>الإجراء</th>
+                    </tr>
+                  </thead>
+                  <tbody id="dashboardStudentsTbody">
+                    <!-- Loaded dynamically -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Quick Status & Insights -->
+          <div>
+            <!-- Status Breakdown -->
+            <div class="dashboard-card">
+              <div class="card-header">
+                <div class="card-title">
+                  <span>🎯</span>
+                  <span>مؤشرات المتابعة التربوية</span>
+                </div>
+              </div>
+              <div class="card-body">
+                <div style="display: flex; flex-direction: column; gap: 14px;">
+                  <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; background: #ecfdf5; border-radius: var(--radius-md);">
+                    <span style="font-weight: 700; color: #065f46;">🚀 متقدمون وفق الخطة:</span>
+                    <span id="dashOnTrackCount" style="font-weight: 900; font-size: 1.2rem; color: #047857;">0</span>
+                  </div>
+                  <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; background: #eff6ff; border-radius: var(--radius-md);">
+                    <span style="font-weight: 700; color: #1e40af;">🌟 حققوا الهدف الشهري:</span>
+                    <span id="dashMonthlyGoalAchieved" style="font-weight: 900; font-size: 1.2rem; color: #1d4ed8;">0</span>
+                  </div>
+                  <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; background: #fffbeb; border-radius: var(--radius-md);">
+                    <span style="font-weight: 700; color: #92400e;">⚠️ يحتاجون إلى دعم ومتابعة:</span>
+                    <span id="dashNeedsSupportCount" style="font-weight: 900; font-size: 1.2rem; color: #b45309;">15</span>
+                  </div>
+                  <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; background: #f8fafc; border-radius: var(--radius-md); border: 1px dashed #cbd5e1;">
+                    <span style="font-weight: 700; color: #475569;">🛑 لم يبدأ التسجيل بعد:</span>
+                    <span id="dashNoProgressCount" style="font-weight: 900; font-size: 1.2rem; color: #334155;">15</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Recent Reading Activity -->
+            <div class="dashboard-card">
+              <div class="card-header">
+                <div class="card-title">
+                  <span>🕒</span>
+                  <span>أحدث أنشطة القراءة المسجلة</span>
+                </div>
+              </div>
+              <div class="card-body" id="dashRecentActivities">
+                <div style="text-align: center; color: var(--text-muted); padding: 20px;">
+                  لا توجد أنشطة قراءة مسجلة حتى الآن.
+                  <br><br>
+                  <button class="btn btn-sm btn-primary" onclick="showNewReadingModal()">تسجيل أول قصة الآن ✍️</button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- VIEW 2: ALL STUDENTS -->
+      <div id="view-students" class="view-section" style="display: none;">
+        <div class="filter-toolbar">
+          <div class="filter-group">
+            <input type="text" id="studentsFilterSearch" class="form-input" style="width: 260px;" placeholder="بحث باسم الطالب أو رمزه...">
+            <select id="studentsFilterStatus" class="filter-select">
+              <option value="all">جميع الحالات</option>
+              <option value="needs_support">يحتاجون دعم</option>
+              <option value="on_track">متقدمون</option>
+              <option value="completed">مكتمل الهدف (30 قصة)</option>
+              <option value="has_pending">لديهم قصص بانتظار الاعتماد</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <button class="btn btn-emerald" onclick="showAddStudentModal()">➕ إضافة طالب جديد</button>
+            <button class="btn btn-outline" onclick="exportStudentsCsv()">📥 تصدير Excel / CSV</button>
+          </div>
+        </div>
+
+        <div class="dashboard-card">
+          <div class="card-body" style="padding: 0;">
+            <div class="data-table-container">
+              <table class="data-table" id="allStudentsTable">
+                <thead>
+                  <tr>
+                    <th>الرمز</th>
+                    <th>اسم الطالب كاملاً</th>
+                    <th>إجمالي المقروء</th>
+                    <th>المعتمد</th>
+                    <th>العربية</th>
+                    <th>الإنجليزية</th>
+                    <th>المتبقي للهدف (30)</th>
+                    <th>نسبة التقدم</th>
+                    <th>آخر قراءة</th>
+                    <th>الشارات</th>
+                    <th>الحالة</th>
+                    <th>الملف الشخصي</th>
+                  </tr>
+                </thead>
+                <tbody id="allStudentsTbody">
+                  <!-- Injected via JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- VIEW 3: STUDENT PROFILE -->
+      <div id="view-student-profile" class="view-section" style="display: none;">
+        
+        <!-- Profile Banner -->
+        <div class="profile-header-card">
+          <div class="profile-top-nav">
+            <button class="btn btn-sm btn-outline" style="color: #fff; border-color: rgba(255,255,255,0.3);" onclick="switchView('students')">← العودة لقائمة الطلاب</button>
+            <div style="display: flex; gap: 8px;">
+              <button class="btn btn-sm btn-outline" style="color: #fff; border-color: rgba(255,255,255,0.3);" id="btnPrevStudent" onclick="navigateStudent('prev')">◀ الطالب السابق</button>
+              <button class="btn btn-sm btn-outline" style="color: #fff; border-color: rgba(255,255,255,0.3);" id="btnNextStudent" onclick="navigateStudent('next')">الطالب التالي ▶</button>
+            </div>
+          </div>
+
+          <div class="profile-main-info">
+            <div class="profile-avatar-circle" id="profAvatar">ط</div>
+            <div class="profile-name-section">
+              <h2 id="profFullName">اسم الطالب</h2>
+              <div class="profile-meta-tags">
+                <span class="badge badge-purple" id="profCode">STU-001</span>
+                <span class="badge badge-blue">الصف الرابع الابتدائي</span>
+                <span class="badge badge-gold" id="profStatusBadge">لم يبدأ التسجيل</span>
+              </div>
+            </div>
+            
+            <div style="margin-right: auto; display: flex; gap: 10px;">
+              <button class="btn btn-emerald" onclick="openLibraryReadingModalForCurrentStudent()">
+                <span>📖</span>
+                <span>تسجيل قراءة من المكتبة</span>
+              </button>
+              <button class="btn btn-gold" onclick="openPrintableCardModal()">
+                <span>🎴</span>
+                <span>بطاقة الإنجاز والشهادة</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Overall Progress Numbers -->
+          <div class="profile-stats-bar">
+            <div class="profile-stat-box">
+              <div class="num gold" id="profApprovedCount">0</div>
+              <div class="lbl">القصص المعتمدة</div>
+            </div>
+            <div class="profile-stat-box">
+              <div class="num" id="profRemainingCount">30</div>
+              <div class="lbl">المتبقي لهدف (30)</div>
+            </div>
+            <div class="profile-stat-box">
+              <div class="num purple" id="profAchievementPct">0%</div>
+              <div class="lbl">نسبة الإنجاز الكلية</div>
+            </div>
+            <div class="profile-stat-box">
+              <div class="num emerald" id="profArCount">0</div>
+              <div class="lbl">قصص العربية</div>
+            </div>
+            <div class="profile-stat-box">
+              <div class="num blue" id="profEnCount">0</div>
+              <div class="lbl">قصص الإنجليزية</div>
+            </div>
+            <div class="profile-stat-box">
+              <div class="num" id="profAvgRating">—</div>
+              <div class="lbl">متوسط الفهم (من 4)</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Profile Tabs -->
+        <div class="profile-tabs">
+          <button class="tab-btn active" onclick="switchProfileTab('overview')">📌 نظرة عامة والخط الزمني</button>
+          <button class="tab-btn" onclick="switchProfileTab('stories')">📚 قصصي المقروءة</button>
+          <button class="tab-btn" onclick="switchProfileTab('library-tracker')">📑 متابعة القصص الـ 60</button>
+          <button class="tab-btn" onclick="switchProfileTab('monthly')">📅 التقدم الشهري المستقل</button>
+          <button class="tab-btn" onclick="switchProfileTab('evaluations')">🎯 التقييمات القرائية (5 معايير)</button>
+          <button class="tab-btn" onclick="switchProfileTab('notes')">✍️ ملاحظات وتوصيات المعلم</button>
+        </div>
+
+        <!-- TAB 1: OVERVIEW -->
+        <div id="profTab-overview" class="profile-tab-content">
+          <div class="dashboard-grid-2">
+            <div>
+              <div class="dashboard-card">
+                <div class="card-header">
+                  <div class="card-title">🌱 مسار الطالب نحو إتقان 30 قصة</div>
+                </div>
+                <div class="card-body">
+                  <div style="margin-bottom: 20px;">
+                    <div style="display: flex; justify-content: space-between; font-weight: 700; margin-bottom: 8px;">
+                      <span>التقدم الإجمالي:</span>
+                      <span id="profProgressLabel">0 من 30 قصة</span>
+                    </div>
+                    <div class="progress-track" style="height: 16px;">
+                      <div class="progress-fill progress-fill-emerald" id="profProgressFill" style="width: 0%;"></div>
+                    </div>
+                  </div>
+                  
+                  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 20px;">
+                    <div style="background: #f8fafc; border: 1px solid var(--border-color); padding: 16px; border-radius: var(--radius-md);">
+                      <div style="font-weight: 700; color: #047857; margin-bottom: 4px;">📖 قسم اللغة العربية:</div>
+                      <div id="profArSubtext" style="font-size: 0.9rem; color: var(--text-muted);">0 قصة معتمدة</div>
+                    </div>
+                    <div style="background: #f8fafc; border: 1px solid var(--border-color); padding: 16px; border-radius: var(--radius-md);">
+                      <div style="font-weight: 700; color: #1d4ed8; margin-bottom: 4px;">🌍 قسم اللغة الإنجليزية:</div>
+                      <div id="profEnSubtext" style="font-size: 0.9rem; color: var(--text-muted);">0 قصة معتمدة</div>
+                    </div>
+                  </div>
+
+                  <!-- Timeline -->
+                  <div style="margin-top: 26px;">
+                    <h4 style="margin-bottom: 14px; color: var(--primary-navy);">⏳ الخط الزمني لتطور الطالب طوال الفصل:</h4>
+                    <div id="profTimelineContainer" style="border-right: 2px solid #e2e8f0; padding-right: 18px; margin-right: 10px;">
+                      <!-- Timeline nodes -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Side box: Badges & Strengths -->
+            <div>
+              <div class="dashboard-card">
+                <div class="card-header">
+                  <div class="card-title">🏆 شارات الطالب المكتسبة</div>
+                </div>
+                <div class="card-body" id="profBadgesList">
+                  <!-- Badges -->
+                </div>
+              </div>
+
+              <div class="dashboard-card">
+                <div class="card-header">
+                  <div class="card-title">💡 نقاط القوة ومجالات التحسين</div>
+                </div>
+                <div class="card-body">
+                  <div style="margin-bottom: 14px;">
+                    <div style="font-weight: 700; color: #059669; margin-bottom: 4px;">✨ نقاط القوة الملحوظة:</div>
+                    <div id="profStrengthsText" style="font-size: 0.88rem; color: var(--text-muted);">لم يتم تسجيل ملاحظات بعد.</div>
+                  </div>
+                  <div style="margin-bottom: 14px;">
+                    <div style="font-weight: 700; color: #d97706; margin-bottom: 4px;">🎯 مجالات التحسين والدعم:</div>
+                    <div id="profImprovementsText" style="font-size: 0.88rem; color: var(--text-muted);">لم يتم تسجيل مجالات بعد.</div>
+                  </div>
+                  <div>
+                    <div style="font-weight: 700; color: #6b21a8; margin-bottom: 4px;">📌 توصيات المعلم للمرحلة القادمة:</div>
+                    <div id="profRecommendationsText" style="font-size: 0.88rem; color: var(--text-muted);">لم تسجل توصيات بعد.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 2: STORIES READ -->
+        <div id="profTab-stories" class="profile-tab-content" style="display: none;">
+          <div class="dashboard-card">
+            <div class="card-header">
+              <div class="card-title">سجل القصص المقروءة للطالب</div>
+              <button class="btn btn-sm btn-primary" onclick="showNewReadingModal(currentStudentId)">➕ تسجيل قصة جديدة</button>
+            </div>
+            <div class="card-body" style="padding: 0;">
+              <div class="data-table-container">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>عنوان القصة</th>
+                      <th>اللغة</th>
+                      <th>تاريخ القراءة</th>
+                      <th>نوع القراءة</th>
+                      <th>التقييم (من 4)</th>
+                      <th>الحالة</th>
+                      <th>ملاحظات المعلم</th>
+                      <th>الإجراءات</th>
+                    </tr>
+                  </thead>
+                  <tbody id="profStoriesTbody">
+                    <!-- Logs list -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 3: 60 STORIES LIBRARY TRACKER -->
+        <div id="profTab-library-tracker" class="profile-tab-content" style="display: none;">
+          <div class="dashboard-card">
+            <div class="card-header">
+              <div class="card-title">
+                <span>📑</span>
+                <span>جدول متابعة القصص الستين (30 عربية + 30 إنجليزية)</span>
+              </div>
+              <div style="font-size: 0.85rem; color: var(--text-muted);">
+                هدف المبادرة الرسمي: قراءة 30 قصة فقط مع مرونة الاختيار بين القسمين.
+              </div>
+            </div>
+            <div class="card-body" style="padding: 0;">
+              <div class="data-table-container">
+                <table class="data-table" id="profLibraryTrackerTable">
+                  <thead>
+                    <tr>
+                      <th>رقم القصة</th>
+                      <th>عنوان القصة</th>
+                      <th>اللغة</th>
+                      <th>القيمة التربوية</th>
+                      <th>حالة القراءة للطالب</th>
+                      <th>تاريخ الإكمال</th>
+                      <th>التقييم</th>
+                      <th>الإجراء</th>
+                    </tr>
+                  </thead>
+                  <tbody id="profLibraryTrackerTbody">
+                    <!-- 60 stories rows -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 4: MONTHLY RECORDS -->
+        <div id="profTab-monthly" class="profile-tab-content" style="display: none;">
+          <div class="dashboard-card">
+            <div class="card-header">
+              <div class="card-title">📅 سجلات المتابعة الشهرية المستقلة للطالب</div>
+              <button class="btn btn-sm btn-outline" onclick="openMonthlyNoteModal(currentStudentId)">✍️ تدوين تقرير شهري للمعلم</button>
+            </div>
+            <div class="card-body">
+              <div id="profMonthlyContainer">
+                <!-- Injected monthly cards -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 5: EVALUATIONS -->
+        <div id="profTab-evaluations" class="profile-tab-content" style="display: none;">
+          <div class="dashboard-card">
+            <div class="card-header">
+              <div class="card-title">🎯 تفصيل معايير التقييم القرائي الخمسة للصف الرابع</div>
+            </div>
+            <div class="card-body">
+              <div id="profCriteriaBreakdown">
+                <!-- Evaluation breakdown bars -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 6: TEACHER NOTES -->
+        <div id="profTab-notes" class="profile-tab-content" style="display: none;">
+          <div class="dashboard-card">
+            <div class="card-header">
+              <div class="card-title">✍️ تحرير نقاط القوة وجوانب التحسين والتوصيات</div>
+            </div>
+            <div class="card-body">
+              <form id="profNotesForm" onsubmit="saveStudentNotes(event)">
+                <div class="form-group">
+                  <label class="form-label">✨ أبرز نقاط القوة التي لاحظها المعلم:</label>
+                  <textarea id="editProfStrengths" class="form-textarea" rows="3" style="width: 100%;" placeholder="مثال: تميز لغوي في التعبير، فهم عميق لمغزى القصة، حب المشاركة..."></textarea>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">🎯 جوانب التحسين ومجالات الدعم:</label>
+                  <textarea id="editProfImprovements" class="form-textarea" rows="3" style="width: 100%;" placeholder="مثال: يحتاج تشجيعاً في قراءة القصص الإنجليزية، تعزيز الثقة في إعادة السرد..."></textarea>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">📌 توصيات المعلم للمرحلة القادمة:</label>
+                  <textarea id="editProfRecommendations" class="form-textarea" rows="3" style="width: 100%;" placeholder="مثال: تكليفه بقراءة مشتركة مع زميل، تخصيص قصة إنجليزية كل أسبوعين..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">💾 حفظ التوصيات في قاعدة البيانات</button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- VIEW 4: ARABIC LIBRARY -->
+      <div id="view-arabic-library" class="view-section" style="display: none;">
+        <div class="filter-toolbar">
+          <div class="filter-group">
+            <input type="text" id="arLibrarySearch" class="form-input" style="width: 280px;" placeholder="بحث برقم القصة، العنوان، أو القيمة التربوية..." oninput="filterStories('ar')">
+          </div>
+          <div style="font-weight: 700; color: var(--accent-gold);">
+            📖 30 قصة مكتوبة باللغة العربية الفصحى الرصينة (برنامج حذق)
+          </div>
+        </div>
+        <div class="story-grid" id="arabicStoriesGrid">
+          <!-- Injected via JS -->
+        </div>
+      </div>
+
+      <!-- VIEW 5: ENGLISH LIBRARY -->
+      <div id="view-english-library" class="view-section" style="display: none;">
+        <div class="filter-toolbar">
+          <div class="filter-group">
+            <input type="text" id="enLibrarySearch" class="form-input" style="width: 280px;" placeholder="Search by title, number, or value..." oninput="filterStories('en')">
+          </div>
+          <div style="font-weight: 700; color: var(--accent-blue);">
+            🌍 30 English Stories for Grade 4 Primary (Mutqan Initiative)
+          </div>
+        </div>
+        <div class="story-grid" id="englishStoriesGrid">
+          <!-- Injected via JS -->
+        </div>
+      </div>
+
+      <!-- VIEW 6: NEW READING REGISTRATION -->
+      <div id="view-new-reading" class="view-section" style="display: none;">
+        <div class="dashboard-card" style="max-width: 860px; margin: 0 auto;">
+          <div class="card-header">
+            <div class="card-title">✍️ نموذج تسجيل واعتماد قراءة جديدة</div>
+            <span class="badge badge-purple">حفظ مباشر في قاعدة البيانات الدائمة</span>
+          </div>
+          <div class="card-body">
+            <form id="readingLogForm" onsubmit="submitReadingLog(event)">
+              
+              <div class="form-grid-2">
+                <div class="form-group">
+                  <label class="form-label">👨‍🎓 اختيار الطالب *</label>
+                  <select id="formStudentId" class="form-select" style="width: 100%;" required>
+                    <!-- Populated via JS -->
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">🌐 لغة القصة *</label>
+                  <select id="formLanguage" class="form-select" style="width: 100%;" onchange="onLanguageChange(this.value)">
+                    <option value="ar">اللغة العربية (🇸🇦)</option>
+                    <option value="en">اللغة الإنجليزية (🇬🇧)</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Quick Choose From Library -->
+              <div class="form-group" style="background: var(--bg-subtle); padding: 14px; border-radius: var(--radius-md); border: 1px dashed #cbd5e1;">
+                <label class="form-label" style="display: flex; justify-content: space-between;">
+                  <span>📚 اختيار مباشر من مكتبة مبادرة مُتقن (اختياري وسريع):</span>
+                  <span style="font-size: 0.75rem; color: var(--accent-purple);">يملأ العنوان والقيمة تلقائياً</span>
+                </label>
+                <select id="formLibraryStorySelect" class="form-select" style="width: 100%;" onchange="onSelectLibraryStory(this.value)">
+                  <option value="">-- أو اختر قصة من مكتبة مُتقن المعتمدة --</option>
+                  <!-- Options populated -->
+                </select>
+              </div>
+
+              <div class="form-grid-2">
+                <div class="form-group">
+                  <label class="form-label">📖 عنوان القصة *</label>
+                  <input type="text" id="formTitle" class="form-input" style="width: 100%;" placeholder="مثال: صانع الساعات الأمين" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">✍️ اسم المؤلف (إن توفر)</label>
+                  <input type="text" id="formAuthor" class="form-input" style="width: 100%;" placeholder="مبادرة مُتقن — برنامج حذق">
+                </div>
+              </div>
+
+              <div class="form-grid-2">
+                <div class="form-group">
+                  <label class="form-label">📅 تاريخ القراءة *</label>
+                  <input type="date" id="formDateRead" class="form-input" style="width: 100%;" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">🤝 نوع القراءة *</label>
+                  <select id="formReadingType" class="form-select" style="width: 100%;">
+                    <option value="مستقلة">قراءة مستقلة (فردية)</option>
+                    <option value="بمساعدة">قراءة بمساعدة المعلم أو ولي الأمر</option>
+                    <option value="قراءة مشتركة">قراءة مشتركة (مع الزملاء)</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-grid-2">
+                <div class="form-group">
+                  <label class="form-label">📄 عدد الصفحات</label>
+                  <input type="number" id="formPagesCount" class="form-input" style="width: 100%;" value="2" min="1">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">⏱️ مدة القراءة (بالدقائق)</label>
+                  <input type="number" id="formReadingMinutes" class="form-input" style="width: 100%;" value="10" min="1">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">📝 ملخص القصة بأسلوب الطالب:</label>
+                <textarea id="formSummary" class="form-textarea" rows="2" style="width: 100%;" placeholder="سرد موجز لما فهمه الطالب من أحداث القصة..."></textarea>
+              </div>
+
+              <div class="form-grid-2">
+                <div class="form-group">
+                  <label class="form-label">🎭 الشخصيات الرئيسية:</label>
+                  <input type="text" id="formCharacters" class="form-input" style="width: 100%;" placeholder="مثال: مازن، العم محمود">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">💎 الفكرة أو القيمة المستفادة:</label>
+                  <input type="text" id="formMoralLesson" class="form-input" style="width: 100%;" placeholder="مثال: الإتقان والأمانة في العمل شرف للصانع">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">📚 الكلمات الجديدة ومعانيها التي اكتسبها الطالب:</label>
+                <input type="text" id="formNewVocabulary" class="form-input" style="width: 100%;" placeholder="مثال: رصين: متزن ومحكم | نباهة: فطنة وذكاء">
+              </div>
+
+              <!-- ASSESSMENT SECTION: 5 CRITERIA (Scale 1 to 4) -->
+              <div style="background: var(--bg-subtle); padding: 18px; border-radius: var(--radius-lg); margin-bottom: 20px; border: 1px solid var(--border-color);">
+                <h4 style="color: var(--primary-navy); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+                  <span>🎯</span>
+                  <span>نموذج التقييم القرائي (الصف الرابع الابتدائي - مقياس من 1 إلى 4)</span>
+                </h4>
+                <div style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 14px;">
+                  1: يحتاج إلى دعم كبير | 2: في طور التطور | 3: متقن | 4: متقن بتميز | أو اترك خيار «لم يتم التقييم»
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">1. إكمال قراءة القصة:</label>
+                  <div class="rating-buttons-group" data-criterion="completion">
+                    <button type="button" class="rating-btn" onclick="setFormCriterion('completion', 1)">1 (دعم كبير)</button>
+                    <button type="button" class="rating-btn" onclick="setFormCriterion('completion', 2)">2 (في التطور)</button>
+                    <button type="button" class="rating-btn selected" onclick="setFormCriterion('completion', 3)">3 (متقن)</button>
+                    <button type="button" class="rating-btn" onclick="setFormCriterion('completion', 4)">4 (متميز)</button>
+                    <button type="button" class="rating-btn" onclick="setFormCriterion('completion', null)">لم يُقيّم</button>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">2. فهم الأحداث وتسلسلها:</label>
+                  <div class="rating-buttons-group" data-criterion="sequence">
+                    <button type="button" class="rating-btn" onclick="setFormCriterion('sequence', 1)">1 (دعم كبير)</button>
+                    <button type="button" class="rating-btn" onclick="setFormCriterion('sequence', 2)">2 (في التطور)</button>
+                    <button type="button" class="rating-btn selected" onclick="setFormCriterion('sequence', 3)">3 (متقن)</button>
+                    <button type="button" class="rating-btn" onclick="setFormCriterion('sequence', 4)">4 (متميز)</button>
+                    <button type="button" class="rating-btn" onclick="setFormCriterion('sequence', null)">لم يُقيّم</button>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">3. تحديد الفكرة الرئيسية والقيمة:</label>
+                  <div class="rating-buttons-group" data-criterion="main_idea">
+                    <button type="button" class="rating-btn" onclick="setFormCriterion('main_idea', 1)">1 (دعم كبير)</button>
+                    <button type="button" class="rating-btn" onclick="setFormCriterion('main_idea', 2)">2 (في التطور)</button>
+                    <button type="button" class="rating-btn selected" onclick="setFormCriterion('main_idea', 3)">3 (متقن)</button>
+                    <button type="button" class="rating-btn" onclick="setFormCriterion('main_idea', 4)">4 (متميز)</button>
+                    <button type="button" class="rating-btn" onclick="setFormCriterion('main_idea', null)">لم يُقيّم</button>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">4. إعادة سرد القصة بأسلوب الطالب:</label>
+                  <div class="rating-buttons-group" data-criterion="retelling">
+                    <button type="button" class="rating-btn" onclick="setFormCriterion('retelling', 1)">1 (دعم كبير)</button>
+                    <button type="button" class="rating-btn" onclick="setFormCriterion('retelling', 2)">2 (في التطور)</button>
+                    <button type="button" class="rating-btn selected" onclick="setFormCriterion('retelling', 3)">3 (متقن)</button>
+                    <button type="button" class="rating-btn" onclick="setFormCriterion('retelling', 4)">4 (متميز)</button>
+                    <button type="button" class="rating-btn" onclick="setFormCriterion('retelling', null)">لم يُقيّم</button>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">5. اكتساب مفردات جديدة وتوظيفها:</label>
+                  <div class="rating-buttons-group" data-criterion="vocab">
+                    <button type="button" class="rating-btn" onclick="setFormCriterion('vocab', 1)">1 (دعم كبير)</button>
+                    <button type="button" class="rating-btn" onclick="setFormCriterion('vocab', 2)">2 (في التطور)</button>
+                    <button type="button" class="rating-btn selected" onclick="setFormCriterion('vocab', 3)">3 (متقن)</button>
+                    <button type="button" class="rating-btn" onclick="setFormCriterion('vocab', 4)">4 (متميز)</button>
+                    <button type="button" class="rating-btn" onclick="setFormCriterion('vocab', null)">لم يُقيّم</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">💬 ملاحظات وتوجيهات المعلم للطالب:</label>
+                <textarea id="formTeacherNotes" class="form-textarea" rows="2" style="width: 100%;" placeholder="ملاحظات تشجيعية، نقاط تحتاج تدريب إضافي..."></textarea>
+              </div>
+
+              <div class="form-grid-2">
+                <div class="form-group">
+                  <label class="form-label">🏷️ حالة السجل واعتماد القصة *</label>
+                  <select id="formStatus" class="form-select" style="width: 100%;">
+                    <option value="معتمد" selected>معتمد (يُحتسب رسمياً ضمن الـ 30 قصة والشارات) ⭐</option>
+                    <option value="بانتظار المراجعة">بانتظار المراجعة والتقييم ⏳</option>
+                    <option value="مسودة">مسودة مؤقتة 📝</option>
+                    <option value="يحتاج تعديل">يحتاج إلى تعديل أو إعادة قراءة ⚠️</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">🔗 رابط أو إثبات اختياري للقراءة:</label>
+                  <input type="text" id="formProofUrl" class="form-input" style="width: 100%;" placeholder="رابط تسجيل صوتي أو صورة لدفتر الطالب">
+                </div>
+              </div>
+
+              <div style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 24px;">
+                <button type="button" class="btn btn-outline" onclick="resetReadingForm()">مسح الحقول</button>
+                <button type="submit" class="btn btn-emerald" style="padding: 11px 28px; font-size: 1rem;">💾 حفظ واعتماد القراءة</button>
+              </div>
+
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- VIEW 7: MONTHLY TRACKING -->
+      <div id="view-monthly-tracking" class="view-section" style="display: none;">
+        <div class="filter-toolbar">
+          <div class="filter-group">
+            <label style="font-weight: 700;">الشهر الدراسي:</label>
+            <select id="monthlyTrackingSelect" class="filter-select" onchange="loadMonthlyTrackingData(this.value)">
+              <option value="2026-10">الشهر الحالي (أكتوبر 2026)</option>
+              <option value="2026-09">الشهر الأول (سبتمبر 2026)</option>
+              <option value="2026-11">الشهر الثالث (نوفمبر 2026)</option>
+              <option value="2026-12">الشهر الرابع (ديسمبر 2026)</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <span class="badge badge-gold" id="monthlyClassStatsBadge">الهدف الشهري المعتمد: 8 قصص لكل طالب</span>
+          </div>
+        </div>
+
+        <div class="dashboard-card">
+          <div class="card-header">
+            <div class="card-title">📅 تقرير المتابعة الشهرية الشامل لجميع طلاب الفصل</div>
+            <button class="btn btn-sm btn-outline" onclick="window.print()">🖨️ طباعة التقرير الشهري</button>
+          </div>
+          <div class="card-body" style="padding: 0;">
+            <div class="data-table-container">
+              <table class="data-table" id="monthlyTrackingTable">
+                <thead>
+                  <tr>
+                    <th>الرمز</th>
+                    <th>اسم الطالب</th>
+                    <th>المعتمد هذا الشهر</th>
+                    <th>عربي</th>
+                    <th>إنجليزي</th>
+                    <th>نسبة الهدف الشهري</th>
+                    <th>أيام القراءة</th>
+                    <th>متوسط الفهم</th>
+                    <th>المقارنة بالشهر السابق</th>
+                    <th>تعليق وتوصية المعلم</th>
+                    <th>إجراء</th>
+                  </tr>
+                </thead>
+                <tbody id="monthlyTrackingTbody">
+                  <!-- Dynamically loaded -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- VIEW 8: EVALUATIONS -->
+      <div id="view-evaluations" class="view-section" style="display: none;">
+        <div class="dashboard-card">
+          <div class="card-header">
+            <div class="card-title">🎯 لوحة التقييمات القرائية ومستوى الفهم لدى الفصل</div>
+          </div>
+          <div class="card-body">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-bottom: 28px;" id="evalCriteriaCards">
+              <!-- Cards for 5 criteria -->
+            </div>
+
+            <h4 style="margin-bottom: 14px; color: var(--primary-navy);">تحليل أداء كل طالب في معايير الفهم القرائي الخمسة:</h4>
+            <div class="data-table-container">
+              <table class="data-table" id="evaluationsTable">
+                <thead>
+                  <tr>
+                    <th>الرمز</th>
+                    <th>اسم الطالب</th>
+                    <th>القصص المقيمة</th>
+                    <th>المعدل الإجمالي (من 4)</th>
+                    <th>إكمال القراءة</th>
+                    <th>تسلسل الأحداث</th>
+                    <th>الفكرة الرئيسية</th>
+                    <th>إعادة السرد</th>
+                    <th>المفردات اللغوية</th>
+                    <th>التصنيف</th>
+                  </tr>
+                </thead>
+                <tbody id="evaluationsTbody">
+                  <!-- Loaded via JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- VIEW 9: BADGES & CERTIFICATES -->
+      <div id="view-badges" class="view-section" style="display: none;">
+        <div class="dashboard-card">
+          <div class="card-header">
+            <div class="card-title">🏆 منظومة الشارات والتحفيز التربوي لمبادرة «مُتقن»</div>
+          </div>
+          <div class="card-body">
+            <p style="color: var(--text-muted); margin-bottom: 22px;">
+              تُمنح هذه الشارات تلقائياً بناءً على البيانات الحقيقية المسجلة للطلاب دون أحكام أو ترتيب سلبي، مع التركيز على التعزيز الإيجابي والنمو الشخصي:
+            </p>
+            <div class="badges-container" id="badgesMasterContainer">
+              <!-- Badges catalog -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- VIEW 10: REPORTS & EXPORT -->
+      <div id="view-reports" class="view-section" style="display: none;">
+        <div class="dashboard-card">
+          <div class="card-header">
+            <div class="card-title">📑 مركز التقارير الرسمية والتصدير</div>
+          </div>
+          <div class="card-body">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+              
+              <div style="border: 1px solid var(--border-color); padding: 20px; border-radius: var(--radius-lg); background: #ffffff;">
+                <div style="font-size: 1.8rem; margin-bottom: 10px;">📊</div>
+                <h4 style="margin-bottom: 8px; color: var(--primary-navy);">تصدير كامل سجلات القراءة (CSV / Excel)</h4>
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 16px;">
+                  ملف متكامل يحتوي على أسماء الطلاب، عناوين القصص، التواريخ، التقييمات، الملخصات وملاحظات المعلم بتنسيق UTF-8 المتوافق مع Excel.
+                </p>
+                <a href="/api/export/csv" class="btn btn-emerald" style="width: 100%;">📥 تحميل ملف CSV المعتمد</a>
+              </div>
+
+              <div style="border: 1px solid var(--border-color); padding: 20px; border-radius: var(--radius-lg); background: #ffffff;">
+                <div style="font-size: 1.8rem; margin-bottom: 10px;">👨‍🎓</div>
+                <h4 style="margin-bottom: 8px; color: var(--primary-navy);">تقرير فردي تفصيلي لطالب</h4>
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 16px;">
+                  اختر أي طالب لإصدار تقرير شامل جاهز للطباعة موجه لولي الأمر أو إدارة المدرسة مع شاراته وتوصيات المعلم.
+                </p>
+                <select id="reportStudentSelect" class="form-select" style="width: 100%; margin-bottom: 12px;">
+                  <!-- Populated via JS -->
+                </select>
+                <button class="btn btn-primary" style="width: 100%;" onclick="generateStudentReport()">📄 فتح التقرير الفردي</button>
+              </div>
+
+              <div style="border: 1px solid var(--border-color); padding: 20px; border-radius: var(--radius-lg); background: #ffffff;">
+                <div style="font-size: 1.8rem; margin-bottom: 10px;">🏫</div>
+                <h4 style="margin-bottom: 8px; color: var(--primary-navy);">التقرير الختامي لفصل الصف الرابع</h4>
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 16px;">
+                  تقرير قياس الأثر النهائي للمبادرة يتضمن مؤشرات الإنجاز، ومقارنة اللغتين العربية والإنجليزية، ونسب التقدم العامة.
+                </p>
+                <button class="btn btn-gold" style="width: 100%;" onclick="window.print()">🖨️ طباعة تقرير الفصل الرسمي</button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- VIEW 11: INITIATIVE SETTINGS -->
+      <div id="view-settings" class="view-section" style="display: none;">
+        <div class="dashboard-card" style="max-width: 780px; margin: 0 auto;">
+          <div class="card-header">
+            <div class="card-title">⚙️ إعدادات خطة مبادرة «مُتقن» وأهداف القراءة</div>
+          </div>
+          <div class="card-body">
+            <form id="settingsForm" onsubmit="saveInitiativeSettings(event)">
+              
+              <div class="form-grid-2">
+                <div class="form-group">
+                  <label class="form-label">🎯 الهدف الإجمالي لكل طالب (افتراضياً 30 قصة):</label>
+                  <input type="number" id="settingTotalGoal" class="form-input" style="width: 100%;" value="30" min="1" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">📅 عدد القصص المستهدف شهرياً:</label>
+                  <input type="number" id="settingMonthlyTarget" class="form-input" style="width: 100%;" value="8" min="1" required>
+                </div>
+              </div>
+
+              <div class="form-grid-2">
+                <div class="form-group">
+                  <label class="form-label">🇸🇦 التوزيع المستهدف للغة العربية (مرن):</label>
+                  <input type="number" id="settingArTarget" class="form-input" style="width: 100%;" value="15" min="1">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">🇬🇧 التوزيع المستهدف للغة الإنجليزية (مرن):</label>
+                  <input type="number" id="settingEnTarget" class="form-input" style="width: 100%;" value="15" min="1">
+                </div>
+              </div>
+
+              <div class="form-grid-2">
+                <div class="form-group">
+                  <label class="form-label">📅 تاريخ بداية الفصل الدراسي:</label>
+                  <input type="date" id="settingSemesterStart" class="form-input" style="width: 100%;" value="2026-09-01">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">📅 تاريخ نهاية الفصل الدراسي:</label>
+                  <input type="date" id="settingSemesterEnd" class="form-input" style="width: 100%;" value="2026-12-31">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">🔑 رمز دخول المعلم (PIN):</label>
+                <input type="password" id="settingTeacherPin" class="form-input" style="width: 100%;" value="1234">
+                <div class="form-helper">الرمز الافتراضي للتجربة هو 1234، يمكنك تغييره هنا لحماية التعديلات.</div>
+              </div>
+
+              <div style="display: flex; justify-content: flex-end; margin-top: 20px;">
+                <button type="submit" class="btn btn-primary">💾 حفظ الإعدادات</button>
+              </div>
+
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- VIEW 12: BACKUP & DATA MANAGEMENT -->
+      <div id="view-backup" class="view-section" style="display: none;">
+        <div class="dashboard-card" style="max-width: 820px; margin: 0 auto;">
+          <div class="card-header">
+            <div class="card-title">💾 إدارة وحفظ البيانات الدائمة والنسخ الاحتياطي</div>
+          </div>
+          <div class="card-body">
+            
+            <div style="background: #ecfdf5; border: 1px solid #a7f3d0; padding: 18px; border-radius: var(--radius-md); margin-bottom: 24px;">
+              <h4 style="color: #065f46; margin-bottom: 6px;">🔒 حالة قاعدة البيانات: تعمل ومحفوظة بصورة دائمة (ACID SQLite)</h4>
+              <p style="font-size: 0.88rem; color: #047857;">
+                جميع سجلات الطلاب، والقصص المعتمدة، والتقييمات، والشارات تُخزن في قاعدة بيانات حقيقية على الخادم (mutqan.db) ولا تضيع عند تحديث الصفحة أو إغلاق المتصفح أو فتح الموقع من جهاز آخر على نفس الشبكة.
+              </p>
+            </div>
+
+            <div class="form-grid-2">
+              <div style="border: 1px solid var(--border-color); padding: 20px; border-radius: var(--radius-md);">
+                <h4 style="margin-bottom: 8px;">📤 أخذ نسخة احتياطية كاملة (JSON)</h4>
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 14px;">
+                  تنزيل ملف يحتوي على كامل بيانات النظام (الطلاب، السجلات، المكتبة، والتقييمات).
+                </p>
+                <button class="btn btn-primary" style="width: 100%;" onclick="downloadBackupJson()">تنزيل النسخة الاحتياطية</button>
+              </div>
+
+              <div style="border: 1px solid var(--border-color); padding: 20px; border-radius: var(--radius-md);">
+                <h4 style="margin-bottom: 8px;">📥 استيراد واستعادة نسخة احتياطية</h4>
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 14px;">
+                  رفع ملف JSON لدمجه واستعادة البيانات دون فقدان.
+                </p>
+                <input type="file" id="backupFileInput" accept=".json" style="margin-bottom: 10px; font-size: 0.85rem;">
+                <button class="btn btn-gold" style="width: 100%;" onclick="uploadBackupJson()">استعادة البيانات الآن</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<!-- ========================================================
+     MODALS
+     ======================================================== -->
+
+<!-- 1. STORY READER MODAL (Clean, elegant, reading mode with discussion questions) -->
+<div class="modal-overlay" id="storyReaderModal">
+  <div class="modal-card" style="max-width: 820px;">
+    <div class="modal-header">
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <span class="story-num-badge" id="modalStoryNum">1</span>
+        <div>
+          <div class="modal-title" id="modalStoryTitle">عنوان القصة</div>
+          <div style="font-size: 0.82rem; color: var(--accent-gold); font-weight: 700;" id="modalStoryTheme">القيمة المحورية</div>
+        </div>
+      </div>
+      <button class="modal-close-btn" onclick="closeModal('storyReaderModal')">×</button>
+    </div>
+    <div class="modal-body" style="line-height: 1.9; font-size: 1.05rem;" id="modalStoryContent">
+      <!-- Full Story Text -->
+    </div>
+    <div class="modal-footer" style="justify-content: space-between;">
+      <div style="display: flex; gap: 8px;">
+        <button class="btn btn-sm btn-outline" onclick="changeReaderFontSize(1)" title="تكبير الخط">A+</button>
+        <button class="btn btn-sm btn-outline" onclick="changeReaderFontSize(-1)" title="تصغير الخط">A-</button>
+      </div>
+      <div style="display: flex; gap: 10px;">
+        <button class="btn btn-outline" onclick="closeModal('storyReaderModal')">إغلاق</button>
+        <button class="btn btn-emerald" id="btnLogThisStory" onclick="logFromStoryModal()">✍️ تسجيل قراءة هذه القصة لطالب</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 2. MONTHLY TEACHER COMMENT MODAL -->
+<div class="modal-overlay" id="monthlyNoteModal">
+  <div class="modal-card">
+    <div class="modal-header">
+      <div class="modal-title">✍️ تدوين تقرير المتابعة الشهرية للطالب</div>
+      <button class="modal-close-btn" onclick="closeModal('monthlyNoteModal')">×</button>
+    </div>
+    <div class="modal-body">
+      <form id="monthlyNoteForm" onsubmit="submitMonthlyNote(event)">
+        <input type="hidden" id="modalNoteStudentId">
+        <div class="form-group">
+          <label class="form-label">الشهر المستهدف:</label>
+          <select id="modalNoteYearMonth" class="form-select" style="width: 100%;">
+            <option value="2026-10">الشهر الحالي (أكتوبر 2026)</option>
+            <option value="2026-09">الشهر الأول (سبتمبر 2026)</option>
+            <option value="2026-11">الشهر الثالث (نوفمبر 2026)</option>
+            <option value="2026-12">الشهر الرابع (ديسمبر 2026)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">✨ أبرز نقاط القوة لهذا الشهر:</label>
+          <input type="text" id="modalNoteStrengths" class="form-input" style="width: 100%;" placeholder="مثال: انتظام في القراءة اليومية، دقة التعبير">
+        </div>
+        <div class="form-group">
+          <label class="form-label">🎯 جانب أو أكثر للتحسين:</label>
+          <input type="text" id="modalNoteImprovements" class="form-input" style="width: 100%;" placeholder="مثال: التدرب على المفردات الإنجليزية، زيادة سرعة القراءة">
+        </div>
+        <div class="form-group">
+          <label class="form-label">🚀 هدف الشهر القادم:</label>
+          <input type="text" id="modalNoteNextGoal" class="form-input" style="width: 100%;" placeholder="مثال: إتمام 8 قصص جديدة (4 عربي + 4 إنجليزي)">
+        </div>
+        <div class="form-group">
+          <label class="form-label">💬 تعليق المعلم الشامل:</label>
+          <textarea id="modalNoteComment" class="form-textarea" rows="3" style="width: 100%;" placeholder="تعليق وتوجيه تربوي للطالب وولي أمره..."></textarea>
+        </div>
+        <div class="modal-footer" style="padding: 0; margin-top: 18px;">
+          <button type="button" class="btn btn-outline" onclick="closeModal('monthlyNoteModal')">إلغاء</button>
+          <button type="submit" class="btn btn-primary">💾 حفظ التقرير الشهري</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- 3. PRINTABLE CARD & CERTIFICATE MODAL -->
+<div class="modal-overlay" id="printableCardModal">
+  <div class="modal-card" style="max-width: 760px;">
+    <div class="modal-header no-print">
+      <div class="modal-title">🎴 بطاقة إنجاز وشهادة إتمام الطالب</div>
+      <button class="modal-close-btn" onclick="closeModal('printableCardModal')">×</button>
+    </div>
+    <div class="modal-body" id="printableCardContent">
+      <!-- Certificate and Card Preview -->
+    </div>
+    <div class="modal-footer no-print">
+      <button class="btn btn-outline" onclick="closeModal('printableCardModal')">إغلاق</button>
+      <button class="btn btn-gold" onclick="window.print()">🖨️ طباعة البطاقة / الشهادة</button>
+    </div>
+  </div>
+</div>
+
+<!-- 4. ADD STUDENT MODAL -->
+<div class="modal-overlay" id="addStudentModal">
+  <div class="modal-card" style="max-width: 500px;">
+    <div class="modal-header">
+      <div class="modal-title">➕ إضافة طالب جديد للمبادرة</div>
+      <button class="modal-close-btn" onclick="closeModal('addStudentModal')">×</button>
+    </div>
+    <div class="modal-body">
+      <form onsubmit="submitAddStudent(event)">
+        <div class="form-group">
+          <label class="form-label">اسم الطالب كاملاً (رباعي دون اختصار) *</label>
+          <input type="text" id="addStudentFullName" class="form-input" style="width: 100%;" placeholder="مثال: أحمد بن خالد بن محمد السالم" required>
+        </div>
+        <div class="modal-footer" style="padding: 0; margin-top: 18px;">
+          <button type="button" class="btn btn-outline" onclick="closeModal('addStudentModal')">إلغاء</button>
+          <button type="submit" class="btn btn-emerald">حفظ الطالب</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- 5. LOGIN MODAL -->
+<div class="modal-overlay" id="loginModal">
+  <div class="modal-card" style="max-width: 420px;">
+    <div class="modal-header">
+      <div class="modal-title">🔑 دخول المعلم المشرف</div>
+      <button class="modal-close-btn" onclick="closeModal('loginModal')">×</button>
+    </div>
+    <div class="modal-body">
+      <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 14px;">
+        أدخل رمز الدخول السري (PIN) للوصول إلى صلاحيات التعديل والاعتماد.
+      </p>
+      <input type="password" id="loginPinInput" class="form-input" style="width: 100%; font-size: 1.2rem; text-align: center; letter-spacing: 4px;" placeholder="••••" maxlength="8">
+      <div class="modal-footer" style="padding: 0; margin-top: 18px;">
+        <button type="button" class="btn btn-primary" style="width: 100%;" onclick="performLogin()">تأكيد الدخول</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Toast notifications container -->
+<div class="toast-container" id="toastContainer"></div>
+
+<script src="app.js"></script>
+</body>
+</html>

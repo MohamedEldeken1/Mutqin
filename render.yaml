@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: mutqan-platform
+    env: python
+    buildCommand: python database.py && python seed_stories.py
+    startCommand: python server.py
+    plan: free
